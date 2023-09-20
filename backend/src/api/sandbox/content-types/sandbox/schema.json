@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sandboxes",
+  "info": {
+    "singularName": "sandbox",
+    "pluralName": "sandboxes",
+    "displayName": "Sandbox",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "uuid": {
+      "type": "string",
+      "required": true
+    },
+    "modified": {
+      "type": "datetime"
+    },
+    "deleted": {
+      "type": "boolean"
+    },
+    "owners": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "sandboxes"
+    },
+    "starred_by": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "starred_sandboxes"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "React",
+        "React Typescript",
+        "Vue 3",
+        "Vue 3 Typescript",
+        "JavaScript",
+        "TypeScript",
+        "Python",
+        "Lingo3D"
+      ]
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "cover": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "isPublic": {
+      "type": "boolean",
+      "default": true
+    },
+    "questionCount": {
+      "type": "integer"
+    },
+    "lastQuestionTime": {
+      "type": "datetime"
+    }
+  }
+}
