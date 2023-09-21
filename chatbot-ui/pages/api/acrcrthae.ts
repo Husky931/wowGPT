@@ -69,6 +69,10 @@ export const config = {
 const handler = async (req: Request): Promise<Response> => {
   try {
     // Return hard-coded response for development purposes
+    const jwtToken = req.headers.get('Authorization');
+    if (!jwtToken) {
+      return new Response('Unauthorized', { status: 401 });
+    }
     const models = [
       {
         id: 'gpt-3.5-turbo',

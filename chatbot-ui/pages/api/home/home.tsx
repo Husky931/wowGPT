@@ -85,6 +85,7 @@ const Home = ({
 
   const { data, error, refetch } = useQuery(
     ['GetModels', apiKey, serverSideApiKeyIsSet],
+    //@ts-ignore
     ({ signal }) => {
       if (!apiKey && !serverSideApiKeyIsSet) return null;
 

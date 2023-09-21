@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 
 import { useFetch } from '@/hooks/useFetch';
+
 import Cookies from 'js-cookie';
 
 export interface GetModelsRequestProps {
@@ -12,11 +13,17 @@ const useApiService = () => {
 
   const getModels = useCallback(
     (params: GetModelsRequestProps, signal?: AbortSignal) => {
-      return fetchService.post<GetModelsRequestProps>(`/api/models`, {
+      const jwt = Cookies.get('jwt');
+
+      if (!jwt) {
+        return Promise.resolve({ data: 'User is not authenticated' });
+      }
+
+      return fetchService.post<GetModelsRequestProps>(`/api/acrcrthae`, {
         body: { key: params.key },
         headers: {
           'Content-Type': 'application/json',
-           Authorization: `Bearer ${Cookies.get('jwt')}`,
+          Authorization: `Bearer ${Cookies.get('jwt')}`,
         },
         signal,
       });
