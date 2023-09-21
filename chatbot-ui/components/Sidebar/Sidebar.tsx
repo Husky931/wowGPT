@@ -9,6 +9,8 @@ import {
 
 import Search from '../Search';
 
+import { useUser } from '@/contex/AuthContext';
+
 interface Props<T> {
   isOpen: boolean;
   addItemButtonTitle: string;
@@ -54,6 +56,8 @@ const Sidebar = <T,>({
     e.target.style.background = 'none';
   };
 
+  const { userData } = useUser();
+
   return isOpen ? (
     <div>
       <div
@@ -85,6 +89,12 @@ const Sidebar = <T,>({
             onSearch={handleSearchTerm}
           />
         )}
+
+        <div className="relative flex items-center">
+          <div className="w-full flex-1 rounded-md  px-4 pt-3 pr-10 text-[14px] leading-3 text-white">
+            User: @{userData.username}
+          </div>
+        </div>
 
         <div className="flex-grow overflow-auto">
           {items?.length > 0 && (
